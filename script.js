@@ -50,7 +50,6 @@ const pokemons = [
 
 function displayPokemons() {
     const container = document.querySelector('.pokemon-container');
-
     container.innerHTML = '';
 
     if (pokemons.length === 0) {
@@ -58,7 +57,14 @@ function displayPokemons() {
     }
 
     pokemons.forEach(pokemon => {
-        container.innerHTML += `<p>${pokemon.name}</p>`;
-    })
+        // On découpe la chaine de type en tableau
+        const types = pokemon.type.split(',');
+
+        // On construit la liste des <small> pour chaque type
+        const typesHTML = types.map(t => `<small>${t.trim()}</small>`).join(' ');
+
+        // On ajoute le nom du Pokémon suivi des types
+        container.innerHTML += `<p>${pokemon.name} ${typesHTML}</p>`;
+    });
 }
 displayPokemons();
